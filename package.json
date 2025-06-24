@@ -4,9 +4,7 @@
   "description": "专业的八字计算MCP服务器 - 基于lunar-javascript，100%准确，一行命令即可使用",
   "type": "module",
   "main": "./dist/server.js",
-  "bin": {
-    "mcp-bazi": "./dist/server.js"
-  },
+  "bin": "./dist/server.js",
   "exports": {
     ".": "./dist/server.js"
   },
