@@ -1,0 +1,170 @@
+---
+description: overview about this project.
+globs: 
+alwaysApply: false
+---
+# 八字计算MCP服务器项目指南
+
+## 🎯 项目概述
+这是一个基于TypeScript的专业八字计算MCP服务器，使用`lunar-javascript`库提供100%准确的八字计算服务。项目已完成开发并可通过npm包`@mymcp-fun/bazi`一行命令使用。
+
+## 📁 项目结构
+
+### 核心源代码
+- [src/server.ts](mdc:src/server.ts) - MCP服务器主入口，处理协议通信和工具注册
+- [src/bazi-service.ts](mdc:src/bazi-service.ts) - 八字计算核心服务，包装lunar-javascript库
+- [src/types.ts](mdc:src/types.ts) - TypeScript类型定义，包含输入输出接口
+
+### 配置文件
+- [package.json](mdc:package.json) - npm包配置，依赖管理，构建脚本
+- [tsconfig.json](mdc:tsconfig.json) - TypeScript开发配置
+- [tsconfig.build.json](mdc:tsconfig.build.json) - TypeScript生产构建配置
+- [.npmignore](mdc:.npmignore) - npm发布时忽略的文件
+
+### 测试文件
+- [tests/final-accuracy-test.js](mdc:tests/final-accuracy-test.js) - 最终准确性测试，验证100%兼容性
+- [tests/test-mcp-server.js](mdc:tests/test-mcp-server.js) - MCP服务器功能测试
+- [tests/basic-functionality.js](mdc:tests/basic-functionality.js) - 基础功能测试
+- [tests/test-lunar-javascript.js](mdc:tests/test-lunar-javascript.js) - lunar-javascript库API测试
+
+### 文档
+- [README.md](mdc:README.md) - 项目说明文档，包含安装使用指南
+- [LICENSE](mdc:LICENSE) - MIT开源许可证
+
+## 🔧 技术栈
+
+### 核心依赖
+- **@modelcontextprotocol/sdk**: MCP协议SDK，版本1.13.1+
+- **lunar-javascript**: 权威的中文农历计算库，1600+周下载量
+- **TypeScript**: 类型安全的JavaScript超集，版本5.0+
+- **Node.js**: 运行环境，要求18.0+
+
+### 开发工具
+- **tsc**: TypeScript编译器
+- **npm**: 包管理和脚本运行
+
+## 🎯 核心功能
+
+### MCP工具: get_bazi_details
+计算生辰八字和五行信息的主要工具
+
+**输入参数**:
+```typescript
+interface BaziToolInput {
+  year: number;        // 出生年份 (1900-2100)
+  month: number;       // 出生月份 (1-12)
+  day: number;         // 出生日期 (1-31)
+  hour: number;        // 出生时间 (0-23)
+  gender?: string;     // 性别 (可选)
+  timezone?: string;   // 时区 (可选，默认Asia/Shanghai)
+}
+```
+
+**输出结果**:
+```typescript
+interface BaziResult {
+  pillars: {           // 四柱信息
+    year: string;      // 年柱，如"乙酉"
+    month: string;     // 月柱，如"己丑"
+    day: string;       // 日柱，如"丁巳"
+    hour: string;      // 时柱，如"壬子"
+  };
+  elements: {          // 五行分析
+    wood: number;      // 木
+    fire: number;      // 火
+    earth: number;     // 土
+    metal: number;     // 金
+    water: number;     // 水
+  };
+  animal: string;      // 生肖，如"鸡"
+  constellation: string; // 星座，如"水瓶"
+  lunarDate: {         // 农历日期
+    year: number;
+    month: number;
+    day: number;
+    isLeapMonth: boolean;
+  };
+}
+```
+
+## 🚀 使用方式
+
+### 直接运行
+```bash
+npx @mymcp-fun/bazi
+```
+
+### Claude Desktop配置
+```json
+{
+  "mcpServers": {
+    "bazi": {
+      "command": "npx",
+      "args": ["-y", "@mymcp-fun/bazi"]
+    }
+  }
+}
+```
+
+## 🔨 开发指南
+
+### 构建项目
+```bash
+npm run build
+```
+
+### 开发模式
+```bash
+npm run dev
+```
+
+### 运行测试
+```bash
+# 准确性测试
+npm run test:accuracy
+
+# MCP服务器测试  
+node tests/test-mcp-server.js
+
+# 基础功能测试
+node tests/basic-functionality.js
+```
+
+## 📊 项目成就
+
+### 技术成就
+- ✅ **100%准确率**: 与传统算法完全一致
+- ✅ **零依赖问题**: 基于稳定的lunar-javascript库
+- ✅ **TypeScript类型安全**: 完整的类型定义和检查
+- ✅ **MCP协议兼容**: 支持所有标准MCP客户端
+
+### 用户体验
+- ✅ **一行命令启动**: 无需复杂环境配置
+- ✅ **跨平台兼容**: 支持Windows/macOS/Linux
+- ✅ **现代化包管理**: 标准npm生态
+
+### 质量保证
+- ✅ **全面测试覆盖**: 多种测试场景验证
+- ✅ **专业文档**: 详细的使用说明和示例
+- ✅ **开源协议**: MIT许可证，商业友好
+
+## 🔍 调试指南
+
+### 本地调试
+1. 运行构建：`npm run build`
+2. 启动服务器：`node dist/server.js`
+3. 查看stderr日志输出
+
+### MCP Inspector
+使用官方MCP Inspector工具进行交互式调试：
+```bash
+npx @modelcontextprotocol/inspector
+```
+
+### 测试特定场景
+修改测试文件中的日期时间参数，验证不同案例的计算结果。
+
+---
+**项目状态**: 已完成并可生产使用  
+**维护策略**: 定期更新依赖，修复发现的问题  
+**联系方式**: howard@mymcp.fun

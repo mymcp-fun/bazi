@@ -1,0 +1,15 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "sourceMap": false,
+        "declaration": true,
+        "declarationMap": false,
+        "removeComments": true
+    },
+    "exclude": [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "tests/**/*",
+        "python/**/*"
+    ]
+}
