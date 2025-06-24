@@ -11,71 +11,58 @@ export interface BaziToolInput {
 }
 
 /**
- * 四柱信息
+ * 四柱信息 - 使用中文字段名
  */
 export interface Pillars {
-    year: string;    // 年柱，如"甲子"
-    month: string;   // 月柱，如"丙寅"
-    day: string;     // 日柱，如"戊辰"
-    hour: string;    // 时柱，如"庚申"
+    年柱: string;    // 年柱，如"甲子"
+    月柱: string;   // 月柱，如"丙寅"
+    日柱: string;     // 日柱，如"戊辰"
+    时柱: string;    // 时柱，如"庚申"
 }
 
 /**
- * 五行分析
+ * 五行分析 - 简单统计
  */
 export interface Elements {
-    wood: number;    // 木
-    fire: number;    // 火
-    earth: number;   // 土
-    metal: number;   // 金
-    water: number;   // 水
+    木: number;    // 木的个数
+    火: number;    // 火的个数
+    土: number;   // 土的个数
+    金: number;   // 金的个数
+    水: number;   // 水的个数
 }
 
 /**
  * 农历日期信息
  */
 export interface LunarDate {
-    year: number;       // 农历年
-    month: number;      // 农历月
-    day: number;        // 农历日
-    isLeapMonth: boolean; // 是否闰月
+    农历年: number;       // 农历年
+    农历月: number;      // 农历月
+    农历日: number;        // 农历日
+    是否闰月: boolean; // 是否闰月
+    农历月名?: string;   // 如"腊月"、"正月"等
 }
 
 /**
- * 八字计算结果接口 - 与Python版本保持兼容
+ * 八字计算结果接口 - 使用中文字段名
  */
 export interface BaziResult {
     // 四柱信息
-    pillars: Pillars;
+    四柱: Pillars;
 
     // 五行分析
-    elements: Elements;
+    五行: Elements;
 
     // 生肖
-    animal?: string;
+    生肖?: string;
 
     // 星座
-    constellation?: string;
+    星座?: string;
 
     // 农历信息
-    lunarDate?: LunarDate;
+    农历?: LunarDate;
 
-    // 分析信息（可选）
-    analysis?: {
-        dayMaster: string;     // 日主
-        strength: string;      // 强弱
-    };
-
-    // 十神信息（可选）
-    tenGods?: any;
-
-    // 生肖信息（兼容旧版本）
-    zodiac?: {
-        year: string;
-        month: string;
-        day: string;
-        hour: string;
-    };
+    // 日主分析
+    日主?: string;     // 日主天干
 }
 
 /**

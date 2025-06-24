@@ -62,30 +62,37 @@ export class MCPBaziService {
         const dayGanZhi = baZi.getDay();
         const hourGanZhi = baZi.getTime();
 
+        // 获取农历月份名称
+        const lunarMonthNames = [
+            '', '正月', '二月', '三月', '四月', '五月', '六月',
+            '七月', '八月', '九月', '十月', '冬月', '腊月'
+        ];
+
         // 基础结果
         const result: BaziResult = {
-            pillars: {
-                year: yearGanZhi,
-                month: monthGanZhi,
-                day: dayGanZhi,
-                hour: hourGanZhi
+            四柱: {
+                年柱: yearGanZhi,
+                月柱: monthGanZhi,
+                日柱: dayGanZhi,
+                时柱: hourGanZhi
             },
-            elements: {
-                wood: 0,
-                fire: 0,
-                earth: 0,
-                metal: 0,
-                water: 0
+            五行: {
+                木: 0,
+                火: 0,
+                土: 0,
+                金: 0,
+                水: 0
             },
-            // 添加更多信息
-            animal: lunar.getYearShengXiao(),
-            constellation: solar.getXingZuo(),
-            lunarDate: {
-                year: lunar.getYear(),
-                month: lunar.getMonth(),
-                day: lunar.getDay(),
-                isLeapMonth: false // lunar-javascript没有直接的isLeap方法，暂时设为false
-            }
+            生肖: lunar.getYearShengXiao(),
+            星座: solar.getXingZuo(),
+            农历: {
+                农历年: lunar.getYear(),
+                农历月: lunar.getMonth(),
+                农历日: lunar.getDay(),
+                是否闰月: false, // lunar-javascript没有直接的isLeap方法，暂时设为false
+                农历月名: lunarMonthNames[lunar.getMonth()] || `${lunar.getMonth()}月`
+            },
+            日主: dayGanZhi[0] // 日柱的天干就是日主
         };
 
         // 计算五行分布
@@ -112,7 +119,7 @@ export class MCPBaziService {
             '辰': '土', '戌': '土', '丑': '土', '未': '土'
         };
 
-        // 统计五行
+        // 统计五行个数（天干+地支共8个字）
         ganZhiList.forEach(ganZhi => {
             if (ganZhi && ganZhi.length >= 2) {
                 const gan = ganZhi[0];
@@ -120,33 +127,33 @@ export class MCPBaziService {
 
                 // 天干五行
                 if (gan && ganWuXing[gan]) {
-                    this.addElement(result, ganWuXing[gan], 30); // 天干权重较高
+                    this.addElement(result, ganWuXing[gan]);
                 }
 
                 // 地支五行
                 if (zhi && zhiWuXing[zhi]) {
-                    this.addElement(result, zhiWuXing[zhi], 20); // 地支权重
+                    this.addElement(result, zhiWuXing[zhi]);
                 }
             }
         });
     }
 
-    private addElement(result: BaziResult, element: string, weight: number): void {
+    private addElement(result: BaziResult, element: string): void {
         switch (element) {
             case '木':
-                result.elements.wood += weight;
+                result.五行.木 += 1;
                 break;
             case '火':
-                result.elements.fire += weight;
+                result.五行.火 += 1;
                 break;
             case '土':
-                result.elements.earth += weight;
+                result.五行.土 += 1;
                 break;
             case '金':
-                result.elements.metal += weight;
+                result.五行.金 += 1;
                 break;
             case '水':
-                result.elements.water += weight;
+                result.五行.水 += 1;
                 break;
         }
     }
