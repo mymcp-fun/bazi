@@ -27,7 +27,7 @@ npx @mymcp-fun/bazi
 
 ```bash
 npm install -g @mymcp-fun/bazi
-mcp-bazi
+npx @mymcp-fun/bazi
 ```
 
 ## 🔧 MCP客户端配置
