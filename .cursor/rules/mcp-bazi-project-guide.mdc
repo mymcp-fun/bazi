@@ -6,7 +6,7 @@ alwaysApply: false
 # 八字计算MCP服务器项目指南
 
 ## 🎯 项目概述
-这是一个基于TypeScript的专业八字计算MCP服务器，使用`lunar-javascript`库提供100%准确的八字计算服务。项目已完成开发并可通过npm包`@mymcp-fun/bazi`一行命令使用。
+这是一个基于TypeScript的专业八字计算MCP服务器，使用`lunar-javascript`库提供八字计算服务。项目已完成开发并可通过npm包`@mymcp-fun/bazi`一行命令使用。
 
 ## 📁 项目结构
 

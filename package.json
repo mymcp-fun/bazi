@@ -1,12 +1,15 @@
 {
   "name": "@mymcp-fun/bazi",
   "version": "1.0.0",
-  "description": "专业的八字计算MCP服务器 - 基于lunar-javascript，100%准确，一行命令即可使用",
+  "description": "专业的八字计算MCP服务器",
   "type": "module",
-  "main": "./dist/server.js",
-  "bin": "./dist/server.js",
+  "bin": {
+    "bazi": "./dist/server.js"
+  },
   "exports": {
-    ".": "./dist/server.js"
+    ".": "./dist/server.js",
+    "./service": "./dist/bazi-service.js",
+    "./types": "./dist/types.js"
   },
   "directories": {
     "test": "tests"
@@ -15,7 +18,10 @@
     "build": "tsc -p tsconfig.build.json && chmod +x dist/server.js",
     "dev": "ts-node --esm src/server.ts",
     "start": "node dist/server.js",
-    "test": "jest",
+    "test": "npm run test:basic && npm run test:mcp && npm run test:lunar",
+    "test:basic": "npm run build && node tests/basic-functionality.js",
+    "test:mcp": "npm run build && node tests/test-mcp-server.js",
+    "test:lunar": "npm run build && node tests/test-lunar-javascript.js",
     "test:watch": "jest --watch",
     "test:accuracy": "npm run build && node tests/final-accuracy-test.js",
     "lint": "eslint src/**/*.ts",

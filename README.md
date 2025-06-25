@@ -1,6 +1,6 @@
 # 八字计算MCP服务器
 
-🔮 专业的八字计算MCP服务器 - 基于TypeScript和lunar-javascript构建，一行命令即可使用
+🔮 专业的八字计算MCP服务器
 
 [![npm version](https://badge.fury.io/js/@mymcp-fun%2Fbazi.svg)](https://badge.fury.io/js/@mymcp-fun%2Fbazi)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -8,7 +8,6 @@
 ## ✨ 特性
 
 - 🚀 **一行命令启动**: `npx @mymcp-fun/bazi`
-- 🎯 **100%准确**: 使用权威lunar-javascript库，保证计算准确性
 - 📊 **完整八字分析**: 四柱、五行、生肖、星座、农历日期
 - 🌍 **时区支持**: 支持全球时区的准确计算
 - 🔗 **MCP协议兼容**: 无缝集成Claude Desktop等MCP客户端
@@ -27,7 +26,7 @@ npx @mymcp-fun/bazi
 
 ```bash
 npm install -g @mymcp-fun/bazi
-npx @mymcp-fun/bazi
+bazi  # 安装后可直接使用 bazi 命令
 ```
 
 ## 🔧 MCP客户端配置
@@ -126,14 +125,14 @@ npm run build
 ### 运行测试
 
 ```bash
-# 基础功能测试
-node tests/basic-functionality.js
+# 运行所有测试
+npm test
 
-# MCP服务器测试
-node tests/test-mcp-server.js
-
-# 准确性测试
-node tests/final-accuracy-test.js
+# 单独运行测试
+npm run test:basic      # 基础功能测试
+npm run test:mcp        # MCP服务器测试  
+npm run test:lunar      # lunar-javascript API测试
+npm run test:accuracy   # 准确性测试
 ```
 
 ## 📁 项目结构
@@ -157,6 +156,20 @@ bazi/
 - **开发语言**: TypeScript 5.0+
 - **运行环境**: Node.js 18+
 - **依赖管理**: npm
+
+## 📦 作为库使用
+
+本包除了可以作为 MCP 服务器使用，还可以作为 npm 库直接在项目中使用：
+
+```bash
+npm install @mymcp-fun/bazi
+```
+
+### 可用的导出模块
+
+- `@mymcp-fun/bazi/service` - 八字计算服务类
+- `@mymcp-fun/bazi/types` - TypeScript 类型定义
+- `@mymcp-fun/bazi` - 完整的 MCP 服务器
 
 ## 📝 使用示例
 
@@ -183,19 +196,21 @@ Claude会自动调用八字计算工具并返回详细分析：
 ### 编程调用示例
 
 ```typescript
-import { MCPBaziService } from '@mymcp-fun/bazi';
+// 导入八字计算服务
+import { MCPBaziService } from '@mymcp-fun/bazi/service';
+import { BaziResult } from '@mymcp-fun/bazi/types';
 
 const service = new MCPBaziService();
-const result = await service.calculateBazi({
+const result: BaziResult = await service.calculateBazi({
   year: 2006,
   month: 1, 
   day: 28,
   hour: 23
 });
 
-console.log(`四柱: ${result.pillars.year} ${result.pillars.month} ${result.pillars.day} ${result.pillars.hour}`);
-console.log(`生肖: ${result.animal}`);
-console.log(`星座: ${result.constellation}`);
+console.log(`四柱: ${result.四柱.年柱} ${result.四柱.月柱} ${result.四柱.日柱} ${result.四柱.时柱}`);
+console.log(`生肖: ${result.生肖}`);
+console.log(`星座: ${result.星座}`);
 ```
 
 ## 🎯 准确性保证
