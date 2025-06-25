@@ -24,9 +24,9 @@ async function testBasicCalculation() {
 
         console.log('✅ 八字计算成功！');
         console.log('📊 计算结果:');
-        console.log('   四柱:', result.pillars);
-        console.log('   五行:', result.elements);
-        console.log('   生肖:', result.zodiac);
+        console.log('   四柱:', result.四柱);
+        console.log('   五行:', result.五行);
+        console.log('   生肖:', result.生肖);
 
         if (result.analysis) {
             console.log('   分析:', result.analysis);

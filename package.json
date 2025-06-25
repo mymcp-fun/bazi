@@ -1,6 +1,6 @@
 {
   "name": "@mymcp-fun/bazi",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "专业的八字计算MCP服务器",
   "type": "module",
   "bin": {
@@ -58,7 +58,8 @@
     "@modelcontextprotocol/sdk": "^1.13.1",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
-    "lunar-javascript": "^1.7.3"
+    "lunar-javascript": "^1.7.3",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

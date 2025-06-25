@@ -42,7 +42,7 @@ for (const testCase of testCases) {
         console.log(`📝 说明: ${testCase.description}`);
 
         const result = await baziService.calculateBazi(testCase.input);
-        const npmResult = `${result.pillars.year} ${result.pillars.month} ${result.pillars.day} ${result.pillars.hour}`;
+        const npmResult = `${result.四柱.年柱} ${result.四柱.月柱} ${result.四柱.日柱} ${result.四柱.时柱}`;
 
         console.log(`🐍 Python期望: ${testCase.pythonExpected}`);
         console.log(`📦 npm实际:   ${npmResult}`);
@@ -55,9 +55,9 @@ for (const testCase of testCases) {
         }
 
         // 显示额外信息
-        console.log(`🎭 生肖: ${result.animal} | ⭐ 星座: ${result.constellation}`);
-        console.log(`🌙 农历: ${result.lunarDate?.year}年${result.lunarDate?.month}月${result.lunarDate?.day}日`);
-        console.log(`🔥 五行分布: 木${result.elements.wood} 火${result.elements.fire} 土${result.elements.earth} 金${result.elements.metal} 水${result.elements.water}`);
+        console.log(`🎭 生肖: ${result.生肖} | ⭐ 星座: ${result.星座}`);
+        console.log(`🌙 农历: ${result.农历?.农历年}年${result.农历?.农历月}月${result.农历?.农历日}日`);
+        console.log(`🔥 五行分布: 木${result.五行.木} 火${result.五行.火} 土${result.五行.土} 金${result.五行.金} 水${result.五行.水}`);
 
     } catch (error) {
         console.log(`❌ 测试失败: ${error.message}`);
