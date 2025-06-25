@@ -11,8 +11,8 @@ import { MCPBaziService } from './bazi-service.js';
 const createBaziServer = (): McpServer => {
     const server = new McpServer({
         name: '@mymcp-fun/bazi',
-        version: '2.0.1',
-        description: '专业的八字计算MCP服务器 - 基于TypeScript重构，一行命令即可使用'
+        version: '2.0.2',
+        description: '专业的八字计算MCP服务器'
     });
 
     // 初始化八字服务
