@@ -1,10 +1,10 @@
 {
   "name": "@mymcp-fun/bazi",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "专业的八字计算MCP服务器",
   "type": "module",
   "bin": {
-    "bazi": "./dist/server.js"
+    "bazi": "dist/server.js"
   },
   "exports": {
     ".": "./dist/server.js",
